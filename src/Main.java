@@ -1,13 +1,68 @@
-//TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
-// click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
-void main() {
-  //TIP Press <shortcut actionId="ShowIntentionActions"/> with your caret at the highlighted text
-  // to see how IntelliJ IDEA suggests fixing it.
-  IO.println(String.format("Hello and welcome!"));
+import java.util.*;
+import PhoneBook.*;
 
-  for (int i = 1; i <= 5; i++) {
-    //TIP Press <shortcut actionId="Debug"/> to start debugging your code. We have set one <icon src="AllIcons.Debugger.Db_set_breakpoint"/> breakpoint
-    // for you, but you can always add more by pressing <shortcut actionId="ToggleLineBreakpoint"/>.
-    IO.println("i = " + i);
-  }
+public class Main
+{
+    public static void exercise1()
+    {
+        String[] words = {"мышка", "клавиатура", "наушники", "геймпад", "мышка",
+                "геймпад", "джойстик", "руль", "микрофон", "наушники"};
+
+        Set<String> uniqueWords = new HashSet<>(Arrays.asList(words));
+
+        System.out.println("Список уникальных слов:");
+        boolean first = true;
+        for (String word : uniqueWords)
+        {
+            if (!first)
+            {
+                System.out.print(", ");
+            }
+            System.out.print(word);
+            first = false;
+        }
+        System.out.println();
+
+        Map<String, Integer> wordCount = new HashMap<>();
+        for (String word : words)
+        {
+            if (!wordCount.containsKey(word))
+            {
+                wordCount.put(word, 1);
+            }
+            else
+            {
+                wordCount.put(word, wordCount.get(word) + 1);
+            }
+        }
+
+        System.out.println("\nКоличество каждого слова:");
+        for (Map.Entry<String, Integer> entry : wordCount.entrySet())
+        {
+            System.out.println(entry.getKey() + ": " + entry.getValue());
+        }
+    }
+
+    public static void exercise2()
+    {
+        PhoneBook pb = new PhoneBook();
+
+        pb.add("Иванов", "+79876543210");
+        pb.add("Иванов", "+79876543211");
+        pb.add("Петров", "+79123456789");
+        pb.add("Смирнов", "+79998887766");
+
+        pb.printAllEntries();
+
+
+        List<String> ivanovNumbers = pb.get("Иванов");
+        System.out.println("Телефонные номера Иванова: " + ivanovNumbers);
+
+    }
+
+    public static void main(String[] args)
+    {
+        exercise1();
+        exercise2();
+    }
 }
